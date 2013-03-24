@@ -4,4 +4,3 @@ golb==0.1
 houdini.py==0.1.0
 misaka==1.0.2
 ply==3.4
--e git://github.com/hit9/toml-ply.git@14d543a09e3ad305c91cfc6371468f0c39ac4a60#egg=toml_ply-dev
