@@ -3,15 +3,13 @@
 # read source file,  if not found. raise exception
 #
 
-import os
 from ._ import *
-
-PostSrcDir = os.path.join(SrcDir, PostDir)
+from os.path import join as j
 
 # read Post, return unicode content
 def readPost(name):
     fn = name + SrcNameExt
-    fp = os.path.join(PostSrcDir, fn)
+    fp = j(SrcDir, PostDir, fn)
 
     try:
         content = open(fp).read()

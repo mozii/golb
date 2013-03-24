@@ -3,23 +3,23 @@
 #
 # write post
 #
-import os
+
 from ._ import *
-
-PostOutputDir = os.path.join(OutputDir, PostDir)
-
+from os.path import join as j
+from os.path import dirname, exists
+from os import makedirs as mkdir
 
 # content: unicode string
 def writePost(name, content):
     fn = name + OutputNameExt
-    fp = os.path.join(PostOutputDir, fn)
+    fp = j(OutputDir, PostDir, fn)
     # encode to utf8
     content = content.encode(CharSet)
     # write to output
-    dir = os.path.dirname(fp)
+    dir = dirname(fp)
 
-    if dir and os.path.exists(dir) == False:
+    if dir and exists(dir) == False:
         # if output dir not exists, make it
-        os.makedirs(dir)
+        mkdir(dir)
 
     open(fp, "w").write(content)
