@@ -1,15 +1,17 @@
-#coding=utf8
+# coding=utf8
 #
 # render templates
 #
-
-from ._ import TemplatesDir
-
+import blog
+from ._ import templates
 from jinja2 import Environment, FileSystemLoader
 
-loader = FileSystemLoader(TemplatesDir)
+loader = FileSystemLoader(templates)
 env = Environment(loader=loader)
 
-def render(g, template):
+g = dict(blog=blog)
+
+def render(dct, template):
     tpl = env.get_template(template)
-    return tpl.render(g=g)
+    dct.update(g)
+    return tpl.render(**dct)

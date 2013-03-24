@@ -1,16 +1,16 @@
 #coding=utf8
 
-from .g import g
 from .reader import readPost
 from .writer import writePost
-from ._ import PostTemplate
 
 import os
 import parser
 import renderer
 
+tpl = "post.html"
+dir = "post"
 
-class Post(g):
+class Post(object):
 
     def __init__(self, name):
         self.name = name
@@ -25,7 +25,8 @@ class Post(g):
 
     # render post with templates/post.html
     def render(self):
+        dct = dict(post=self)
         # render template
-        content = renderer.render(self, PostTemplate)
+        content = renderer.render(dct, tpl)
         # write
         writePost(self.name, content)

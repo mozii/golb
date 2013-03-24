@@ -3,15 +3,18 @@
 # Read conf.py and update the default settings
 #
 
-# separator for head and body(or say markdown) in your source file
-# why not use the default
-Separator = "----"
 # Source files directory
-SrcDir = "src"
+src = "src"
 # output directory
-OutputDir = "."
+output = "."
 # where the templates in?
-TemplatesDir = "templates"
+templates = "templates"
+# blog name
+name = "Hello World"
+# blog description
+description = "Make difference."
+# blog's author
+author = "You"
 
 # import conf.py to update the settings above
 

@@ -1,8 +1,8 @@
 #coding=utf8
 # parser for content (unicode required str)
 
-from ._ import CharSet
-from ._ import Separator
+from ._ import charset
+from ._ import separator
 import houdini as h
 import toml_ply as toml
 import misaka as m
@@ -17,7 +17,7 @@ class ColorRenderer(HtmlRenderer, SmartyPants):
     def block_code(self, text, lang):
 
         if not lang:
-            text = text.encode(CharSet)
+            text = text.encode(charset)
             return (
                 '\n<pre><code>%s</code></pre>\n' % h.escape_html(text.strip())
             )
@@ -43,7 +43,7 @@ def parse(content):
     separatorLine = None
 
     for line in lines:
-        if Separator in line:
+        if separator in line:
             separatorLine = line
             break
 

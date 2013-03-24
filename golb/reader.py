@@ -3,13 +3,16 @@
 # read source file,  if not found. raise exception
 #
 
-from ._ import *
+import post
+from ._ import src
+from ._ import srcExt
+from ._ import charset
 from os.path import join as j
 
 # read Post, return unicode content
 def readPost(name):
-    fn = name + SrcNameExt
-    fp = j(SrcDir, PostDir, fn)
+    fn = name + srcExt
+    fp = j(src, post.dir, fn)
 
     try:
         content = open(fp).read()
@@ -20,10 +23,10 @@ def readPost(name):
 
     # decode to unicode
     try:
-        content = content.decode(CharSet)
+        content = content.decode(charset)
     except:
         raise Exception(
-            "Post " + name + " not encode " + CharSet
+            "Post " + name + " not encode " + charset
         )
 
     return content
