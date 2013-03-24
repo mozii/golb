@@ -1,7 +1,7 @@
 golb
 ----
 
-`golb` not `gold`, `golb=reverse(blog)` 
+`golb` not `gold`, neither `glob`. `golb=reverse(blog)` 
 
 So far in process
 

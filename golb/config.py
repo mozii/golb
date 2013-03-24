@@ -3,10 +3,6 @@
 # Read conf.py and update the default settings
 #
 
-# Source files directory
-src = "src"
-# output directory
-output = "."
 # where the templates in?
 templates = "templates"
 # blog name

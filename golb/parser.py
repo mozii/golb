@@ -38,7 +38,7 @@ markdown = m.Markdown(
 # Parse toml+markdown str(in unicode format)
 def parse(content):
 
-    lines = content.split("\n")
+    lines = content.splitlines()
 
     separatorLine = None
 
