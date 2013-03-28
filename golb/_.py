@@ -1,8 +1,6 @@
 #coding=utf8
 
 # import settings
-from .config import src
-from .config import output
 from .config import templates
 from .config import name
 from .config import description

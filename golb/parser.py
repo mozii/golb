@@ -4,7 +4,7 @@
 from ._ import charset
 from ._ import separator
 import houdini as h
-import toml_ply as toml
+import toml
 import misaka as m
 from misaka import HtmlRenderer, SmartyPants
 from pygments import highlight
