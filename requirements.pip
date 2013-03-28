@@ -1,6 +1,6 @@
 Jinja2==2.6
 Pygments==1.6
-golb==0.1
 houdini.py==0.1.0
 misaka==1.0.2
 ply==3.4
+toml.py==0.1

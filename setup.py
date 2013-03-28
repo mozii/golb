@@ -1,9 +1,8 @@
 from setuptools import setup
-from golb import __version__
 
 setup(
     name='golb',
-    version=__version__,
+    version="0.1",
     author='hit9',
     author_email='nz2324@126.com',
     description='minimal static blog generator for coders. write posts in markdown and toml,\
