@@ -14,7 +14,7 @@ from .renderer import render
 from os.path import join as j
 from os import listdir as ls
 from os import makedirs as mkdir
-from os.path import dirname, exists
+from os.path import exists
 
 
 def chunks(l, n):

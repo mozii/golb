@@ -1,15 +1,5 @@
 # coding=utf8
 
-# read config from conf.toml
-#
-# configurations
-#   name            blog's name
-#   description     blog's description
-#   author          blog's author's name
-#   templates       the directory's name of your templates
-#   others....      (note: others settings can be touched in template files \
-# in this way: blog.mysetting)
-
 import toml
 from ._ import charset
 from os.path import exists
