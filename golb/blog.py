@@ -63,6 +63,7 @@ class Page(object):
 
     odir = j(o, "page")
     tpl = "page.html"
+    count = 12  # posts number per page
 
     def __init__(self, number, posts=list()):
         self.number = number
