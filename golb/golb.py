@@ -19,7 +19,6 @@ from os.path import dirname, exists
 def build():
 
     posts = [Post(fn) for fn in ls(Post.sdir) if fn.endswith(se)]
-    tags = dict()  # tagname: posts
 
 
     # parse posts and update posts' attr
@@ -32,13 +31,23 @@ def build():
 
         # update post's attrs with parsed content
         post.__dict__.update(dct)
+        # cast
+        post.tags = set(post.tags)
 
-    # init tags
+    # grab tags from posts
+    tagdct = dict()
+
     for post in posts:
         for tag in post.tags:
-            tags.setdefault(tag, []).append(post)
+            tagdct.setdefault(tag, []).append(post)
 
-    # render post
+    # init tags
+    tags = list()
+    for tag, ps in tagdct.items():
+        tags.append(Tag(tag, ps))
+
+
+    # render posts
     # check output dir
     if not exists(Post.odir):
         mkdir(Post.odir)
@@ -46,5 +55,11 @@ def build():
         r = render(dct=dict(blog=Blog, post=post), template=Post.tpl)
         open(post.outp, "w").write(r.encode(charset))
 
-    # render tags
 
+    # render tags
+    # check output dir
+    if not exists(Tag.odir):
+        mkdir(Tag.odir)
+    for tag in tags:
+        r = render(dct=dict(blog=Blog, tag=tag), template=Tag.tpl)
+        open(tag.outp, "w").write(r.encode(charset))

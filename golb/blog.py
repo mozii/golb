@@ -41,10 +41,12 @@ class Tag(object):
 
     sdir = j(s, "tag")
     odir = j(o, "tag")
+    tpl = "tag.html"
 
     def __init__(self, name, posts=list()):
         self.name = name
         self.posts = posts
+        self.outp = j(Tag.odir, name + oe)
 
 
 class Page(object):

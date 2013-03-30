@@ -12,4 +12,5 @@ separator = "----"
 src = "src"
 # output directory
 output = "."
+# templates directory
 from .config import templates
