@@ -16,6 +16,7 @@ from os import listdir as ls
 from os import makedirs as mkdir
 from os.path import dirname, exists
 
+
 def build():
 
     posts = [Post(fn) for fn in ls(Post.sdir) if fn.endswith(se)]
@@ -36,7 +37,7 @@ def build():
         post.tags = set(post.tags)
 
     # grab tags from posts
-    print "Extract tags from posts.."
+    print "Extract tags.."
     tagdct = dict()
 
     for post in posts:
@@ -49,9 +50,19 @@ def build():
         tags.append(Tag(tag, ps))
 
 
+    # sort pages
+    print "Sort pages.."
+    # sort posts by update time
+    posts.sort(key=lambda p: p.update_at.timetuple(), reverse=True)
+
+    # 12 posts per page
+    x = zip(*[iter(posts)]*12) if len(posts) > 12 else (posts, )
+
+    pages = [Page(number=i+1, posts=list(k)) for i, k in enumerate(x)]
+
+
     # render posts
     print "Render posts.."
-    # check output dir
     if not exists(Post.odir):
         mkdir(Post.odir)
     for post in posts:
@@ -61,11 +72,19 @@ def build():
 
     # render tags
     print "Render tags.."
-    # check output dir
     if not exists(Tag.odir):
         mkdir(Tag.odir)
     for tag in tags:
         r = render(dct=dict(blog=Blog, tag=tag), template=Tag.tpl)
         open(tag.outp, "w").write(r.encode(charset))
+
+
+    # render pages
+    print "Render pages.."
+    if not exists(Page.odir):
+        mkdir(Page.odir)
+    for page in pages:
+        r = render(dct=dict(blog=Blog, page=page), template=Page.tpl)
+        open(page.outp, "w").write(r.encode(charset))
 
     print "Build complete"
