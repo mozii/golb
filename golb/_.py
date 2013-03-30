@@ -19,9 +19,3 @@ separator = "----"
 src = "src"
 # output directory
 output = "."
-# post directory name
-postDir = "post"
-# tag output directory
-tagDir = "tag"
-# page output directory
-pageDir = "page"

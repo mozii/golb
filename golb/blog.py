@@ -9,9 +9,9 @@ from ._ import src as s
 from ._ import output as o
 from ._ import srcExt as se
 from ._ import outputExt as oe
-from ._ import postDir as postd
-from ._ import tagDir as tagd
 from os.path import join as j
+
+sel = len(se)
 
 
 class Blog(object):
@@ -23,19 +23,22 @@ class Blog(object):
 
 class Post(object):
 
-    sdir = j(s, postd)  # source dir
-    odir = j(o, postd) # output dir
+    sdir = j(s, "post")  # source dir
+    odir = j(o, "post") # output dir
+    tpl = "post.html"
 
-    def __init__(self, name):
+    def __init__(self, fn):  # init one Post object by filename
+        name = fn[:-sel]
         self.name = name
+        self.filename = fn
         self.srcp =  j(Post.sdir, name + se) # source path
         self.outp = j(Post.odir, name + oe)  # output path
 
 
 class Tag(object):
 
-    sdir = j(s, tagd)
-    odir = j(o, tagd)
+    sdir = j(s, "tag")
+    odir = j(o, "tag")
 
     def __init__(self, name, posts=list()):
         self.name = name

@@ -16,8 +16,7 @@ from os import listdir as ls
 
 def build():
 
-    sel = len(se) # source extension len
-    posts = [Post(f[:-sel]) for f in ls(Post.sdir) if f.endswith(se)]
+    posts = [Post(fn) for fn in ls(Post.sdir) if fn.endswith(se)]
 
     for post in posts:
         c = open(post.srcp).read().decode(charset)
