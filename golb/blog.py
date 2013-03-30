@@ -1,24 +1,26 @@
 #coding=utf8
 # blog instance
-from ._ import name
-from ._ import description
-from ._ import author
-
-
 from ._ import src as s
 from ._ import output as o
 from ._ import srcExt as se
 from ._ import outputExt as oe
+from .config import blogConf
 from os.path import join as j
 
 sel = len(se)
 
 
+class MetaBlog(type):
+
+    def __init__(cls, name, bases, attrs):
+        for attr, val in blogConf.items():
+            setattr(cls, attr, val)
+
+
 class Blog(object):
 
-    name = name
-    description = description
-    author = author
+    __metaclass__ = MetaBlog
+
 
 
 class Post(object):

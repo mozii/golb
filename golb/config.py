@@ -1,24 +1,34 @@
 # coding=utf8
-#
-# Configuration for golb
-#
 
-# default settings
+# read config from conf.toml
 #
-# which set is your templates?
-templates = "templates"
-# blog's name
-name = "Hello World"
-# blog's description
-description = "Make difference"
-# blog's author
-author = "yourname"
+# configurations
+#   name            blog's name
+#   description     blog's description
+#   author          blog's author's name
+#   templates       the directory's name of your templates
+#   others....      (note: others settings can be touched in template files \
+# in this way: blog.mysetting)
+
+import toml
+from ._ import charset
+from os.path import exists
+
+conffn = "conf.toml"
+
+# minimal & default configuration
+conf = dict(
+    name=u"HelloWorld!",
+    description=u"Make difference",
+    author=u"you!",
+    templates="templates"
+)
 
 
-# try to import settings from conf.py
-try:
-    from conf import *
-except ImportError:
-    # if conf.py not found in working directory
-    # then do nothing
-    pass
+if exists(conffn):
+    dct = toml.loads(open(conffn).read().decode(charset))
+    conf.update(dct)
+
+
+templates = conf.pop("templates")
+blogConf = conf

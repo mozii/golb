@@ -1,11 +1,4 @@
 # coding=utf8
-
-# import settings
-from .config import templates
-from .config import name
-from .config import description
-from .config import author
-
 # global vars
 # charset utf8 everywhere
 charset = "utf8"
@@ -19,3 +12,4 @@ separator = "----"
 src = "src"
 # output directory
 output = "."
+from .config import templates
