@@ -1,22 +1,24 @@
 # coding=utf8
 #
-# Read conf.py and update the default settings
+# Configuration for golb
 #
 
-# where the templates in?
+# default settings
+#
+# which set is your templates?
 templates = "templates"
-# blog name
+# blog's name
 name = "Hello World"
-# blog description
-description = "Make difference."
+# blog's description
+description = "Make difference"
 # blog's author
-author = "You"
+author = "yourname"
 
-# import conf.py to update the settings above
 
+# try to import settings from conf.py
 try:
     from conf import *
 except ImportError:
-    # if import error, do nothing
-    # use the default vars
+    # if conf.py not found in working directory
+    # then do nothing
     pass

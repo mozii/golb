@@ -1,13 +1,13 @@
-#coding=utf8
-# parser for content (unicode required str)
+# coding=utf8
+# parser for source file
 
-from ._ import charset
-from ._ import separator
-import houdini as h
 import toml
 import misaka as m
-from misaka import HtmlRenderer, SmartyPants
+import houdini as h
+from ._ import charset
+from ._ import separator
 from pygments import highlight
+from misaka import HtmlRenderer, SmartyPants
 from pygments.lexers import get_lexer_by_name
 from pygments.formatters import HtmlFormatter
 
@@ -35,11 +35,11 @@ markdown = m.Markdown(
 )
 
 
-# Parse toml+markdown str(in unicode format)
+# method: parse
+# input: unicode string( head: toml, body: markdown )
+# output: dict(markdown, html, toml-dict..)
 def parse(content):
-
     lines = content.splitlines()
-
     separatorLine = None
 
     for line in lines:
@@ -48,9 +48,7 @@ def parse(content):
             break
 
     if not separatorLine:
-        raise Exception(
-            "Separator not found."
-        )
+        raise Exception("Separator not found.")
 
     head, body = tuple(content.split(separatorLine))
 
