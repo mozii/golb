@@ -20,6 +20,7 @@ def build():
 
     posts = [Post(fn) for fn in ls(Post.sdir) if fn.endswith(se)]
 
+    print "Read and parse posts.."
 
     # parse posts and update posts' attr
     for post in posts:
@@ -35,6 +36,7 @@ def build():
         post.tags = set(post.tags)
 
     # grab tags from posts
+    print "Extract tags from posts.."
     tagdct = dict()
 
     for post in posts:
@@ -48,6 +50,7 @@ def build():
 
 
     # render posts
+    print "Render posts.."
     # check output dir
     if not exists(Post.odir):
         mkdir(Post.odir)
@@ -57,9 +60,12 @@ def build():
 
 
     # render tags
+    print "Render tags.."
     # check output dir
     if not exists(Tag.odir):
         mkdir(Tag.odir)
     for tag in tags:
         r = render(dct=dict(blog=Blog, tag=tag), template=Tag.tpl)
         open(tag.outp, "w").write(r.encode(charset))
+
+    print "Build complete"
