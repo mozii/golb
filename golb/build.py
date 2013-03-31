@@ -4,6 +4,7 @@ from .blog import Tag
 from .blog import Post
 from .blog import Page
 from .blog import Blog
+from .blog import index
 
 from ._ import charset
 from ._ import srcExt as se
@@ -62,6 +63,8 @@ def build():
     posts.sort(key=lambda p: p.update_at.timetuple(), reverse=True)
     x = chunks(posts, Page.count)
     pages = [Page(number=i + 1, posts=list(k)) for i, k in enumerate(x)]
+    pages[0].first = True
+    pages[-1].last = True
 
     # render posts
     print "Render posts.."
@@ -85,6 +88,9 @@ def build():
         mkdir(Page.odir)
     for page in pages:
         r = render(dct=dict(blog=Blog, page=page), template=Page.tpl)
+        if page.first:
+            # render index
+            open(index.outp, "w").write(r.encode(charset))
         open(page.outp, "w").write(r.encode(charset))
 
     print "Build complete"

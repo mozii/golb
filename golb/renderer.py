@@ -7,7 +7,7 @@ from jinja2 import Environment, FileSystemLoader
 
 loader = FileSystemLoader(templates)
 env = Environment(loader=loader)
-
+env.trim_blocks = True
 
 def render(dct, template):
     # dct: vars to pass to templates

@@ -8,6 +8,7 @@ from blog import Post
 from os.path import join as j
 from os import makedirs as mkdir
 from os.path import exists
+from os import system
 
 helloworld = u"""
 title = "helloworld"  # this is post's title
@@ -47,5 +48,9 @@ def init():
     open(
         j(Post.sdir, "helloworld" + se), "w"
     ).write(helloworld.encode(charset))
+
+    print "Fetch templates from github.com.."
+
+    system("git submodule add git://github.com/hit9/golb-templates-classic.git templates")
 
     print "Init complete"

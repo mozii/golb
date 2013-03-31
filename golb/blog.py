@@ -69,3 +69,10 @@ class Page(object):
         self.number = number
         self.posts = posts
         self.outp = j(Page.odir, str(number) + oe)
+        self.first = False
+        self.last = False
+
+
+class index(object):
+
+    outp = j(o, "index.html")
