@@ -45,7 +45,7 @@ def init():
     # write sample posts
     print "write you a sample post.."
     open(
-        j(Post.sdir, "helloworld" + se),"w"
+        j(Post.sdir, "helloworld" + se), "w"
     ).write(helloworld.encode(charset))
 
     print "Init complete"

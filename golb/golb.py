@@ -1,6 +1,9 @@
 # coding=utf8
 """
-Usage: golb <command> [-hv]
+Usage:
+  golb <command>
+  golb (-h | --help)
+  golb (-v | --version)
 Options:
   -h   --help    show this
   -v --version   show version
@@ -19,7 +22,6 @@ def main():
     # parse the arguments
     dct = docopt(__doc__, version='golb version 0.1')
     c = dct["<command>"]
-    print dct
     if c == "init":
         init()
     elif c == "build":
