@@ -5,6 +5,7 @@ from .blog import Post
 from .blog import Page
 from .blog import Blog
 from .blog import index
+from .blog import archives
 
 from ._ import charset
 from ._ import srcExt as se
@@ -92,5 +93,10 @@ def build():
             # render index
             open(index.outp, "w").write(r.encode(charset))
         open(page.outp, "w").write(r.encode(charset))
+
+    # render archives
+    print "Render archives.."
+    r = render(dct=dict(blog=Blog, posts=posts), template=archives.tpl)
+    open(archives.outp, "w").write(r.encode(charset))
 
     print "Build complete"

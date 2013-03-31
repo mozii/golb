@@ -28,6 +28,8 @@ description = "Make difference"
 author = "yourname"
 # the directory of your templates(required!)
 templates = "templates"
+# the count of posts per page,  default: 12
+posts_per_page = 12
 # other settings ..
 # other settings can be touched in template files in this way: blog.mysetting
 """

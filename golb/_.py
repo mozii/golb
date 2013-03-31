@@ -14,3 +14,4 @@ src = "src"
 output = "."
 # templates directory
 from .config import templates
+from .config import posts_per_page

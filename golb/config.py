@@ -11,7 +11,8 @@ conf = dict(
     name=u"HelloWorld!",
     description=u"Make difference",
     author=u"you!",
-    templates="templates"
+    templates="templates",
+    posts_per_page = 12
 )
 
 
@@ -21,4 +22,5 @@ if exists(conffn):
 
 
 templates = conf.pop("templates")
+posts_per_page = conf.pop("posts_per_page")
 blogConf = conf

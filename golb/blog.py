@@ -4,6 +4,7 @@ from ._ import src as s
 from ._ import output as o
 from ._ import srcExt as se
 from ._ import outputExt as oe
+from ._ import posts_per_page
 from .config import blogConf
 from os.path import join as j
 from os.path import getmtime
@@ -63,7 +64,7 @@ class Page(object):
 
     odir = j(o, "page")
     tpl = "page.html"
-    count = 12  # posts number per page
+    count = posts_per_page  # posts number per page
 
     def __init__(self, number, posts=list()):
         self.number = number
@@ -76,3 +77,9 @@ class Page(object):
 class index(object):
 
     outp = j(o, "index.html")
+
+
+class archives (object):
+
+    outp = j(o, "archives.html")
+    tpl = "archives.html"
