@@ -1,22 +1,24 @@
 # coding=utf8
-#
-# Read conf.py and update the default settings
-#
 
-# where the templates in?
-templates = "templates"
-# blog name
-name = "Hello World"
-# blog description
-description = "Make difference."
-# blog's author
-author = "You"
+import toml
+from ._ import charset
+from os.path import exists
 
-# import conf.py to update the settings above
+conffn = "conf.toml"
 
-try:
-    from conf import *
-except ImportError:
-    # if import error, do nothing
-    # use the default vars
-    pass
+# minimal & default configuration
+conf = dict(
+    name=u"HelloWorld!",
+    description=u"Make difference",
+    author=u"you!",
+    templates="templates"
+)
+
+
+if exists(conffn):
+    dct = toml.loads(open(conffn).read().decode(charset))
+    conf.update(dct)
+
+
+templates = conf.pop("templates")
+blogConf = conf
