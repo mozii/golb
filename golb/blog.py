@@ -79,7 +79,7 @@ class index(object):
     outp = j(o, "index.html")
 
 
-class archives (object):
+class archives(object):
 
     outp = j(o, "archives.html")
     tpl = "archives.html"

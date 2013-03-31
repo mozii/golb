@@ -11,7 +11,7 @@ from os.path import exists
 from os import system
 
 helloworld = u"""
-title = "helloworld"  # this is post's title
+title = "hello World!"  # this is post's title
 tags = ["unTaged", ]  # ["tag1", "tag2", ...]
 ----
 ## Hello World!
@@ -21,7 +21,7 @@ conf = u"""
 # config for this blog
 
 # blog's name
-name = "HelloWorld"
+name = "Hello golb!"
 # blog's description
 description = "Make difference"
 # blog's author
