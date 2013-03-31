@@ -99,4 +99,8 @@ def build():
     r = render(dct=dict(blog=Blog, posts=posts), template=archives.tpl)
     open(archives.outp, "w").write(r.encode(charset))
 
+    # about page
+    print "Parse and render about page.."
+    # TODO: about in the blog.py. read and parse it,  and then render
+
     print "Build complete"
