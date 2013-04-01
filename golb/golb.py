@@ -10,11 +10,12 @@ Options:
 Commands:
   init        init current directory as a golb working directory
   build       build blog
-
+  clean       rm output files
 """
 
 from .init import init
 from .build import build
+from .clean import clean
 from docopt import docopt
 
 
@@ -26,6 +27,8 @@ def main():
         init()
     elif c == "build":
         build()
+    elif c == "clean":
+        clean()
     else:
         exit(__doc__)
 

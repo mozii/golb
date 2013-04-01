@@ -13,7 +13,7 @@ conf = dict(
         name=u"HelloWorld!",
         description=u"Make difference",
         templates="templates",
-        posts_per_page = 12
+        posts_per_page=12
     ),
     author=dict(
         name=u"you",

@@ -37,11 +37,10 @@ def chunks(l, n):
     # split list into equal parts
     # chunks(range(1, 9), 3) => (1, 2, 3), (4, 5, 6), (7, 8)
     for i in xrange(0, len(l), n):
-        yield l[i:i+n]
+        yield l[i:i + n]
 
 
 def build():
-
 
     posts = [Post(fn) for fn in ls(Post.sdir) if fn.endswith(se)]
 
