@@ -33,14 +33,14 @@ conf = u"""
 # blog's name
 name = "Follow My Heart"
 # blog's description
-description = "自强不息身方健，心底无私天地宽"
+description = "Make difference"
 # the directory of your templates(required!)
 templates = "templates"
 # posts count for per page,default: 12
 posts_per_page = 3
 # blog's author
 [author]
-name = "hit9"
+name = "hit9"  # your github username
 email = "nz2324@126.com"
 
 # other settings ..
