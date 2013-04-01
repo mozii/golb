@@ -10,7 +10,7 @@ setup(
     license='BSD',
     keywords='static blog generator, markdown, toml, posts',
     url='http://github.com/hit9/golb',
-    # long_description=open('Readme.md').read(),
+    long_description=open('README.md').read(),
     packages=['golb'],
     include_package_data = True,
     entry_points = {

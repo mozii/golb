@@ -19,7 +19,7 @@ class ColorRenderer(HtmlRenderer, SmartyPants):
         if not lang:
             text = text.encode(charset)
             return (
-                '\n<pre><code>%s</code></pre>\n' % h.escape_html(text.strip())
+                '\n<div class="highlight"><pre><code>%s</code></pre></div>\n' % h.escape_html(text.strip())
             )
 
         lexer = get_lexer_by_name(lang, stripall=True)

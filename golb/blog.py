@@ -4,24 +4,13 @@ from ._ import src as s
 from ._ import output as o
 from ._ import srcExt as se
 from ._ import outputExt as oe
-from .config import blogConf
+from .conf import conf
 from os.path import join as j
 from os.path import getmtime
 from datetime import datetime
 
+
 sel = len(se)
-
-
-class MetaBlog(type):
-
-    def __init__(cls, name, bases, attrs):
-        for attr, val in blogConf.items():
-            setattr(cls, attr, val)
-
-
-class Blog(object):
-
-    __metaclass__ = MetaBlog
 
 
 class Post(object):
@@ -63,9 +52,35 @@ class Page(object):
 
     odir = j(o, "page")
     tpl = "page.html"
-    count = 12  # posts number per page
 
     def __init__(self, number, posts=list()):
         self.number = number
         self.posts = posts
         self.outp = j(Page.odir, str(number) + oe)
+        self.first = False
+        self.last = False
+
+
+# other pages
+class Other(object):
+
+    def __init__(self, **attrs):
+        for k, v in attrs.items():
+            setattr(self, k, v)
+
+# index page
+index = Other(outp=j(o, "index" + oe))
+
+# archives page
+
+archives = Other(
+    outp=j(o, "archives" + oe),
+    tpl="archives.html"
+)
+
+
+about = Other(
+    srcp=j(s, "about" + se),
+    outp=j(o, "about" + oe),
+    tpl="about.html"
+)
