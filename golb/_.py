@@ -12,7 +12,3 @@ separator = "----"
 src = "src"
 # output directory
 output = "."
-# templates directory
-from .config import templates
-# posts count of per page,  should not be shared as blog's attr
-from .config import posts_per_page

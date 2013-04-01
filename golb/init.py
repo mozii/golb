@@ -11,27 +11,45 @@ from os.path import exists
 from os import system
 
 helloworld = u"""
-title = "hello World!"  # this is post's title
+title = "Hello World!"  # this is post's title
 tags = ["unTaged", ]  # ["tag1", "tag2", ...]
 ----
-## Hello World!
+
+```c
+
+int main(void)
+{
+    printf("Hello World!");
+    return 0;
+}
+
+```
+
 """
 
 conf = u"""
 # config for this blog
-
+[blog]
 # blog's name
-name = "Hello golb!"
+name = "Follow My Heart"
 # blog's description
-description = "Make difference"
-# blog's author
-author = "yourname"
+description = "自强不息身方健，心底无私天地宽"
 # the directory of your templates(required!)
 templates = "templates"
-# the count of posts per page,  default: 12
-posts_per_page = 12
+# posts count for per page,default: 12
+posts_per_page = 3
+# blog's author
+[author]
+name = "hit9"
+email = "nz2324@126.com"
+
 # other settings ..
-# other settings can be touched in template files in this way: blog.mysetting
+# other settings can be touched in template files in this way:
+# keygroup.key
+# i.e:
+# [mysettings]
+# somevar = true
+# you can reach this setting in templates: mysettings.somevar
 """
 
 

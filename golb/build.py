@@ -3,20 +3,34 @@
 from .blog import Tag
 from .blog import Post
 from .blog import Page
-from .blog import Blog
 from .blog import index
 from .blog import archives
+
+from .conf import conf
 
 from ._ import charset
 from ._ import srcExt as se
 
 from .parser import parse
-from .renderer import render
 
 from os.path import join as j
 from os import listdir as ls
 from os import makedirs as mkdir
 from os.path import exists
+
+#
+# render templates
+#
+from jinja2 import Environment, FileSystemLoader
+
+loader = FileSystemLoader(conf["blog"]["templates"])
+env = Environment(loader=loader)
+env.trim_blocks = True
+
+
+def render(template, **dct):
+    dct.update(conf)
+    return env.get_template(template).render(**dct)
 
 
 def chunks(l, n):
@@ -27,6 +41,7 @@ def chunks(l, n):
 
 
 def build():
+
 
     posts = [Post(fn) for fn in ls(Post.sdir) if fn.endswith(se)]
 
@@ -62,7 +77,7 @@ def build():
     print "Sort pages.."
     # sort posts by update time
     posts.sort(key=lambda p: p.update_at.timetuple(), reverse=True)
-    x = chunks(posts, Page.count)
+    x = chunks(posts, conf["blog"]["posts_per_page"])
     pages = [Page(number=i + 1, posts=list(k)) for i, k in enumerate(x)]
     pages[0].first = True
     pages[-1].last = True
@@ -72,7 +87,7 @@ def build():
     if not exists(Post.odir):
         mkdir(Post.odir)
     for post in posts:
-        r = render(dct=dict(blog=Blog, post=post), template=Post.tpl)
+        r = render(Post.tpl, post=post)
         open(post.outp, "w").write(r.encode(charset))
 
     # render tags
@@ -80,7 +95,7 @@ def build():
     if not exists(Tag.odir):
         mkdir(Tag.odir)
     for tag in tags:
-        r = render(dct=dict(blog=Blog, tag=tag), template=Tag.tpl)
+        r = render(Tag.tpl, tag=tag)
         open(tag.outp, "w").write(r.encode(charset))
 
     # render pages
@@ -88,7 +103,7 @@ def build():
     if not exists(Page.odir):
         mkdir(Page.odir)
     for page in pages:
-        r = render(dct=dict(blog=Blog, page=page), template=Page.tpl)
+        r = render(Page.tpl, page=page)
         if page.first:
             # render index
             open(index.outp, "w").write(r.encode(charset))
@@ -96,7 +111,7 @@ def build():
 
     # render archives
     print "Render archives.."
-    r = render(dct=dict(blog=Blog, posts=posts), template=archives.tpl)
+    r = render(archives.tpl, posts=posts)
     open(archives.outp, "w").write(r.encode(charset))
 
     # about page
