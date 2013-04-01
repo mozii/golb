@@ -4,6 +4,7 @@ from .blog import Tag
 from .blog import Post
 from .blog import Page
 from .blog import index
+from .blog import about
 from .blog import archives
 
 from .conf import conf
@@ -115,6 +116,12 @@ def build():
 
     # about page
     print "Parse and render about page.."
-    # TODO: about in the blog.py. read and parse it,  and then render
-
+    if exists(about.srcp):
+        c = open(about.srcp).read().decode(charset)
+        dct = parse(c)
+    else:
+        dct = {}
+    about.__dict__.update(dct)
+    r = render(about.tpl, about=about)
+    open(about.outp, "w").write(r.encode(charset))
     print "Build complete"

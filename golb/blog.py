@@ -61,12 +61,26 @@ class Page(object):
         self.last = False
 
 
-class index(object):
+# other pages
+class Other(object):
 
-    outp = j(o, "index.html")
+    def __init__(self, **attrs):
+        for k, v in attrs.items():
+            setattr(self, k, v)
+
+# index page
+index = Other(outp=j(o, "index" + oe))
+
+# archives page
+
+archives = Other(
+    outp=j(o, "archives" + oe),
+    tpl="archives.html"
+)
 
 
-class archives(object):
-
-    outp = j(o, "archives.html")
-    tpl = "archives.html"
+about = Other(
+    srcp=j(s, "about" + se),
+    outp=j(o, "about" + oe),
+    tpl="about.html"
+)
