@@ -55,9 +55,6 @@ email = "nz2324@126.com"
 
 def init():
 
-    if not exists(".git"):
-        exit("Please init here a git repo first.")
-
     print "mkdir " + Post.sdir + ".."
     mkdir(Post.sdir)
     # write conf.toml
@@ -71,6 +68,8 @@ def init():
 
     print "Fetch templates from github.com.."
 
-    system("git submodule add git://github.com/hit9/golb-templates-classic.git templates")
+    system("git clone git://github.com/hit9/golb-templates-classic.git templates")
+
+    print "Maybe you need to rm templates/.git if you are in a git repo now"
 
     print "Init complete"
