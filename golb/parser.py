@@ -56,7 +56,7 @@ def parse(content):
     dct = toml.loads(head)
     # add markdown, html key
     dct["markdown"] = body
-    dct["html"] = html = markdown.render(body)
+    dct["html"] = markdown.render(body)
     # add summary, use the first 255 chars
-    dct["summary"] = cuthtml(html, 255)
+    dct["summary"] = markdown.render(body[:255])
     return dct
