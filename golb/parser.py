@@ -10,7 +10,7 @@ from pygments import highlight
 from misaka import HtmlRenderer, SmartyPants
 from pygments.lexers import get_lexer_by_name
 from pygments.formatters import HtmlFormatter
-
+from htmlcutstring import cutHtmlString as cuthtml
 
 class ColorRenderer(HtmlRenderer, SmartyPants):
 
@@ -50,17 +50,13 @@ def parse(content):
     if not l:
         raise Exception("Separator not found.")
 
-    hd = lines[:l]
-    bd = lines[l+1:]
-
-    head, body = "\n".join(hd), "\n".join(bd)
+    head, body = "\n".join(lines[:l]), "\n".join(lines[l+1:])
 
     # parse head
     dct = toml.loads(head)
     # add markdown, html key
     dct["markdown"] = body
-    dct["html"] = markdown.render(body)
-    # add summary, use the first 5 line
-    su = bd[:5]
-    dct["summary"] = markdown.render("\n".join(su))
+    dct["html"] = html = markdown.render(body)
+    # add summary, use the first 255 chars
+    dct["summary"] = cuthtml(html, 255)
     return dct
