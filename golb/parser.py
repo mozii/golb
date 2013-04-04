@@ -40,17 +40,17 @@ markdown = m.Markdown(
 # output: dict(markdown, html, toml-dict..)
 def parse(content):
     lines = content.splitlines()
-    separatorLine = None
+    l = None
 
-    for line in lines:
+    for lineno, line in enumerate(lines):
         if separator in line:
-            separatorLine = line
-            break
+            l = lineno
+            break  # use the first ----
 
-    if not separatorLine:
+    if not l:
         raise Exception("Separator not found.")
 
-    head, body = tuple(content.split(separatorLine))
+    head, body = "\n".join(lines[:l]), "\n".join(lines[l+1:])
 
     # parse head
     dct = toml.loads(head)
