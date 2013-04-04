@@ -31,7 +31,7 @@ renderer = ColorRenderer()
 
 markdown = m.Markdown(
     renderer,
-    extensions=m.EXT_FENCED_CODE | m.EXT_NO_INTRA_EMPHASIS
+    extensions=m.EXT_FENCED_CODE | m.EXT_NO_INTRA_EMPHASIS | m.EXT_AUTOLINK
 )
 
 
