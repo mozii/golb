@@ -2,6 +2,7 @@ Jinja2==2.6
 Pygments==1.6
 docopt==0.6.1
 houdini.py==0.1.0
+htmlcutstring==1.1
 misaka==1.0.2
 ply==3.4
 toml.py==0.1
