@@ -5,6 +5,7 @@ from .blog import Post
 from .blog import Page
 from .blog import index
 from .blog import about
+from .blog import tags
 from .blog import archives
 
 from .conf import conf
@@ -69,9 +70,9 @@ def build():
             tagdct.setdefault(tag, []).append(post)
 
     # init tags
-    tags = list()
+    taglst = list()
     for tag, ps in tagdct.items():
-        tags.append(Tag(tag, ps))
+        taglst.append(Tag(tag, ps))
 
     # sort pages
     print "Sort pages.."
@@ -94,9 +95,14 @@ def build():
     print "Render tags.."
     if not exists(Tag.odir):
         mkdir(Tag.odir)
-    for tag in tags:
+    for tag in taglst:
         r = render(Tag.tpl, tag=tag)
         open(tag.outp, "w").write(r.encode(charset))
+
+    # sort tags by posts number
+    taglst.sort(key=lambda x: len(x.posts), reverse=True)
+    r = render(tags.tpl, tags=taglst)
+    open(tags.outp, "w").write(r.encode(charset))
 
     # render pages
     print "Render pages.."

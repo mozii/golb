@@ -84,3 +84,8 @@ about = Other(
     outp=j(o, "about" + oe),
     tpl="about.html"
 )
+
+tags = Other(
+    outp=j(o, "tags" + oe),
+    tpl="tags.html"
+)
