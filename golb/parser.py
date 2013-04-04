@@ -50,11 +50,17 @@ def parse(content):
     if not l:
         raise Exception("Separator not found.")
 
-    head, body = "\n".join(lines[:l]), "\n".join(lines[l+1:])
+    hd = lines[:l]
+    bd = lines[l+1:]
+
+    head, body = "\n".join(hd), "\n".join(bd)
 
     # parse head
     dct = toml.loads(head)
     # add markdown, html key
     dct["markdown"] = body
     dct["html"] = markdown.render(body)
+    # add summary, use the first 5 line
+    su = bd[:5]
+    dct["summary"] = markdown.render("\n".join(su))
     return dct
