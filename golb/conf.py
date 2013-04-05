@@ -13,6 +13,7 @@ conf = dict(
         name=u"HelloWorld!",
         description=u"Make difference",
         templates="templates",
+        url="example.com",
         posts_per_page=12
     ),
     author=dict(
