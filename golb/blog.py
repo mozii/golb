@@ -1,5 +1,4 @@
 # coding=utf8
-# blog instance
 from ._ import src as s
 from ._ import output as o
 from ._ import srcExt as se
@@ -14,15 +13,6 @@ sel = len(se)
 
 
 class Post(object):
-    #
-    #  minimal attributes
-    #   name                i.e. "helloworld"
-    #   filename            filename  i.e. "helloworld.md"
-    #   srcp                source file path   "src/post/helloworld.md
-    #   outp                output file path   "./post/helloworld.html"
-    #   update_at           datetime object
-    #   title               post's title
-    #   tags                list
 
     sdir = j(s, "post")  # source dir
     odir = j(o, "post")  # output dir
@@ -30,8 +20,8 @@ class Post(object):
 
     def __init__(self, fn):  # init one Post object by filename
         name = fn[:-sel]
-        self.name = name
-        self.filename = fn
+        self.name = name  # post's name i.e. "hellowrold"
+        self.filename = fn  # post's filename i.e. "hellowrold.md"
         self.srcp = j(Post.sdir, name + se)  # source path
         self.outp = j(Post.odir, name + oe)  # output path
         self.update_at = datetime.fromtimestamp(getmtime(self.srcp))
@@ -71,21 +61,28 @@ class Other(object):
 # index page
 index = Other(outp=j(o, "index" + oe))
 
-# archives page
 
+# archives page
 archives = Other(
     outp=j(o, "archives" + oe),
     tpl="archives.html"
 )
 
-
+# about page (src:about.md, outp: about.html)
 about = Other(
     srcp=j(s, "about" + se),
     outp=j(o, "about" + oe),
     tpl="about.html"
 )
 
+# tags page (outp: tags.html)
 tags = Other(
     outp=j(o, "tags" + oe),
     tpl="tags.html"
+)
+
+# feed.atom
+
+feed = Other(
+    outp=j(o, "feed.atom")
 )

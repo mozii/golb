@@ -36,6 +36,8 @@ name = "Follow My Heart"
 description = "Make difference"
 # the directory of your templates(required!)
 templates = "templates"
+# your blog's url(required!)(ends without forward slash)
+url = "example.org"
 # posts count for per page,default: 12
 posts_per_page = 3
 # blog's author

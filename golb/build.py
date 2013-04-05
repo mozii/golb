@@ -7,6 +7,7 @@ from .blog import index
 from .blog import about
 from .blog import tags
 from .blog import archives
+from .blog import feed
 
 from .conf import conf
 
@@ -19,6 +20,8 @@ from os.path import join as j
 from os import listdir as ls
 from os import makedirs as mkdir
 from os.path import exists
+from pyatom import AtomFeed
+
 
 #
 # render templates
@@ -42,7 +45,14 @@ def chunks(l, n):
         yield l[i:i + n]
 
 
-def build():
+def build(local=False):
+    #
+    #  local - use blog.url=""
+    #
+
+    if local:
+        print "Set blog.url to empty"
+        conf["blog"]["url"] = ""
 
     posts = [Post(fn) for fn in ls(Post.sdir) if fn.endswith(se)]
 
@@ -130,4 +140,28 @@ def build():
     about.__dict__.update(dct)
     r = render(about.tpl, about=about)
     open(about.outp, "w").write(r.encode(charset))
+
+    # generate atom feed
+    print "Generate atom feed.."
+    _feed = AtomFeed(
+        title=conf["blog"]["name"],
+        subtitle=conf["blog"]["description"],
+        feed_url=conf["blog"]["url"]+"/feed.atom",
+        url=conf["blog"]["url"],
+        author=conf["author"]["name"]
+    )
+
+    # gen the first 10 posts
+    for post in posts[:10]:
+        _feed.add(
+            title=post.title,
+            content=post.html,
+            content_type="html",
+            author=conf["author"]["name"],
+            url=conf["blog"]["url"]+"/"+post.outp,
+            updated=post.update_at
+        )
+
+    open(feed.outp, "w").write(_feed.to_string().encode(charset))
+
     print "Build complete"

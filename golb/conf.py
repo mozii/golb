@@ -13,6 +13,7 @@ conf = dict(
         name=u"HelloWorld!",
         description=u"Make difference",
         templates="templates",
+        url="example.com",
         posts_per_page=12
     ),
     author=dict(
@@ -25,6 +26,7 @@ conf = dict(
 if exists(conffn):
     dct = toml.loads(open(conffn).read().decode(charset))
     conf.update(dct)
+
 
 # add md5 hash for author's email
 

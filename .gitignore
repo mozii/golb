@@ -8,3 +8,4 @@ dist/
 golb.egg-info/
 testing
 venv/
+test.py
