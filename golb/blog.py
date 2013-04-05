@@ -80,3 +80,9 @@ tags = Other(
     outp=j(o, "tags" + oe),
     tpl="tags.html"
 )
+
+# feed.atom
+
+feed = Other(
+    outp=j(o, "feed.atom")
+)

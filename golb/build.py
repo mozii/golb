@@ -7,6 +7,7 @@ from .blog import index
 from .blog import about
 from .blog import tags
 from .blog import archives
+from .blog import feed
 
 from .conf import conf
 
@@ -44,7 +45,13 @@ def chunks(l, n):
         yield l[i:i + n]
 
 
-def build():
+def build(local=False):
+    #
+    #  local - use blog.url=""
+    #
+
+    if local:
+        conf["blog"]["url"] = ""
 
     posts = [Post(fn) for fn in ls(Post.sdir) if fn.endswith(se)]
 
@@ -135,7 +142,7 @@ def build():
 
     # generate atom feed
     print "Generate atom feed.."
-    feed = AtomFeed(
+    _feed = AtomFeed(
         title=conf["blog"]["name"],
         subtitle=conf["blog"]["description"],
         feed_url=conf["blog"]["url"]+"/feed.atom",
@@ -145,7 +152,7 @@ def build():
 
     # gen the first 10 posts
     for post in posts[:10]:
-        feed.add(
+        _feed.add(
             title=post.title,
             content=post.html,
             content_type="html",
@@ -154,6 +161,6 @@ def build():
             updated=post.update_at
         )
 
-    open("feed.atom", "w").write(feed.to_string().encode(charset))
+    open(feed.outp, "w").write(_feed.to_string().encode(charset))
 
     print "Build complete"
