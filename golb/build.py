@@ -51,6 +51,7 @@ def build(local=False):
     #
 
     if local:
+        print "Set blog.url to empty"
         conf["blog"]["url"] = ""
 
     posts = [Post(fn) for fn in ls(Post.sdir) if fn.endswith(se)]
