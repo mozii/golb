@@ -26,6 +26,7 @@ if exists(conffn):
     dct = toml.loads(open(conffn).read().decode(charset))
     conf.update(dct)
 
+
 # add md5 hash for author's email
 
 from hashlib import md5
