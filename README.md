@@ -58,12 +58,12 @@ And then set `templates` in section `blog` to `classic`
 touch src/post/HelloWorld.md
 ```
 
-  golb use toml+Markdown as post's source:
+golb use toml+Markdown as post's source:
+
 ```
 title = "Hello World!"
 tags = ["tag1", "tag2"]  # tags
 ----
-
 ## Hello World!
 ```
 
