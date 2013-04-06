@@ -1,5 +1,6 @@
-# coding=utf8
+#
 # parser for source file
+#
 
 import toml
 import misaka as m
@@ -17,15 +18,18 @@ class ColorRenderer(HtmlRenderer, SmartyPants):
     def block_code(self, text, lang):
 
         if not lang:
-            text = text.encode(charset)
+            text = text.encode(charset).strip()
             return (
-                '\n<div class="highlight"><pre><code>%s</code></pre></div>\n' % h.escape_html(text.strip())
+                """\n<div class="highlight">
+                <pre><code>%s</code></pre>
+                </div>\n""" % h.escape_html(text)
             )
 
         lexer = get_lexer_by_name(lang, stripall=True)
         formatter = HtmlFormatter()
 
         return highlight(text, lexer, formatter)
+
 
 renderer = ColorRenderer()
 
@@ -37,7 +41,7 @@ markdown = m.Markdown(
 
 # method: parse
 # input: unicode string( head: toml, body: markdown )
-# output: dict(markdown, html, toml-dict..)
+# output: dict(markdown, html, toml-dict-items)
 def parse(content):
     lines = content.splitlines()
     l = None
@@ -57,6 +61,4 @@ def parse(content):
     # add markdown, html key
     dct["markdown"] = body
     dct["html"] = markdown.render(body)
-    # add summary, use the first 255 chars
-    dct["summary"] = markdown.render(body[:255])
     return dct
