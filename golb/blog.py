@@ -87,6 +87,3 @@ tags = Other(
     out=j(o, "tags" + oe),
     template="tags.html"
 )
-
-# feed
-feed = Other(out=j(o, "feed.atom"))

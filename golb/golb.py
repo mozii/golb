@@ -1,4 +1,13 @@
+# run time attributes
+# conf, config parsed from conf.toml
+# env,  jinja2 environment
+# posts, parsed and sorted(by date) posts instances list
+# tags,  sorted(by posts number) tags instances list
+# pages, pages instances list
+# charset,  utf8 everywhere
+# se,  source extension
 import toml
+import sys
 from ._ import conf_fn
 from ._ import charset
 from ._ import srcExt as se
@@ -7,7 +16,6 @@ from .blog import Tag
 from .blog import Post
 from .blog import Page
 from .blog import tags as _tags  # make alias
-from .blog import feed as _feed
 from .blog import about
 from .blog import index
 from .blog import archives
@@ -17,13 +25,17 @@ from os.path import join as j
 from os import listdir as ls
 from os import makedirs as mkdir
 from os.path import exists
-from pyatom import AtomFeed
 from jinja2 import Environment, FileSystemLoader
 
+import signals
 
+# posts
+posts = None
+tags = None
+pages = None
 # jinja2 environment
-
 env = None
+
 
 def init_jinja():
     global env
@@ -154,32 +166,26 @@ def render_about():
     open(about.out, "w").write(r.encode(charset))
 
 
-def gen_feed(posts):
-    feed = AtomFeed(
-        title=conf["blog"]["name"],
-        subtitle=conf["blog"]["description"],
-        feed_url=conf["blog"]["url"]+"/feed.atom",
-        url=conf["blog"]["url"],
-        author=conf["author"]["name"]
-    )
-
-    # gen the first 10 posts
-    for post in posts[:10]:
-        feed.add(
-            title=post.title,
-            content=post.html,
-            content_type="html",
-            author=conf["author"]["name"],
-            url=conf["blog"]["url"]+"/"+post.out,
-            updated=post.update_at
-        )
-
-    open(_feed.out, "w").write(feed.to_string().encode(charset))
 
 
-def main():
+def init_plugins():
+    #
+    # load plugin.
+    #
+    plugins = conf["blog"].get("plugins", [])
+
+    for plugin in plugins:
+        _plugin = __import__("golb.plugins." + plugin, fromlist=plugins)
+        # register plugin
+        _plugin.register()
+
+
+def build():
+    global posts, pages, tags
     print "Read conf.toml.."
-    conf = get_conf()
+    get_conf()
+    print "Init plugins.."
+    init_plugins()
     print "Init jinja environment.."
     init_jinja()
     print "Read and parse posts.."
@@ -192,6 +198,8 @@ def main():
     tags = sort_tags(tags)
     print "Generate pages from posts.."
     pages = get_pages(posts)
+    # send a signal, runtime
+    signals.runtime.send(sys.modules[__name__])
     print "Render posts.."
     render_posts(posts)
     print "Render tags.."
@@ -202,6 +210,4 @@ def main():
     render_archives(posts)
     print "Render about page.."
     render_about()
-    print "Generate feed to feed.atom.."
-    gen_feed(posts)
     print "Build complete."
