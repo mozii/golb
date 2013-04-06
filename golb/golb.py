@@ -180,7 +180,7 @@ def init_plugins():
         _plugin.register()
 
 
-def build():
+def build(local=False):
     global posts, pages, tags
     print "Read conf.toml.."
     get_conf()
@@ -188,6 +188,9 @@ def build():
     init_plugins()
     print "Init jinja environment.."
     init_jinja()
+    # generate html with empty site url
+    if local:
+        conf["blog"]["url"] = ""
     print "Read and parse posts.."
     posts = get_posts()
     print "Sort posts by updated time.."
