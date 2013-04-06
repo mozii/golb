@@ -26,13 +26,16 @@ How-To-Start
 To start bloging:
 
 1. make your repo directory:
+
 ```
 mkdir -p  myblog/src/post
 cd myblog
 git init
 ```
+
 2. In the root of repo, touch `conf.toml` and edit:
-```toml
+
+```
 [blog]
 # blog's name
 name = "Follow My Heart"
@@ -56,7 +59,9 @@ email = "nz2324@126.com"
 # somevar = true
 # you can reach this setting in templates: mysettings.somevar
 ```
+
 3. Add one set of templates as submodule,  i.e. use the `classic`
+
 ```
 git submodule add git://github.com/hit9/golb-templates-classic.git classic
 ```
@@ -65,10 +70,13 @@ And then set `templates` in section `blog` to `classic`
 
 
 4. start blog the first post:
+
 ```
 touch src/post/HelloWorld.md
 ```
+
 golb use toml+Markdown as post's source:
+
 ```
 title = "Hello World!"
 tags = ["tag1", "tag2"]  # tags
