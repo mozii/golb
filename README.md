@@ -5,6 +5,11 @@ Not `gold` neither `glob`, `golb == reverse(blog)`
 
 Markdown&TOML based static blog for programmers with simple templates and plugin support.
 
+Install
+-------
+
+    pip install git+git://github.com/hit9/golb.git
+
 Usage
 -----
 
@@ -79,6 +84,15 @@ DEMO
 ----
 
 * https://github.com/hit9/hit9.github.com
+
+
+Develop
+-------
+
+1. plugin develop, checkout [golb/plugins](golb/plugins). golb use `blinker` to implement plugins. One plugin needs a method called `register` to connect to `runtime` signal.
+
+2. templates develop, checkout [classic](https://github.com/hit9/golb-templates-classic).
+
 
 License
 -------
