@@ -20,10 +20,16 @@ from os.path import exists
 from pyatom import AtomFeed
 from jinja2 import Environment, FileSystemLoader
 
+
 # jinja2 environment
-loader = FileSystemLoader(conf["blog"]["templates"])
-env = Environment(loader=loader)
-env.trim_blocks = True
+
+env = None
+
+def init_jinja():
+    global env
+    loader = FileSystemLoader(conf["blog"]["templates"])
+    env = Environment(loader=loader)
+    env.trim_blocks = True
 
 
 def render(template, **dct):
@@ -174,6 +180,8 @@ def gen_feed(posts):
 def main():
     print "Read conf.toml.."
     conf = get_conf()
+    print "Init jinja environment.."
+    init_jinja()
     print "Read and parse posts.."
     posts = get_posts()
     print "Sort posts by updated time.."
