@@ -74,11 +74,45 @@ git init
   ## Hello World!
   ```
 
+5. Generate htmls
+
+  ```
+  golb -l
+  python -m SimpleHTTPServer 5000
+  ```
+  see results in browser: http://localhost:5000
+
 Templates
 ---------
 
 * classic https://github.com/hit9/golb-templates-classic
 
+### How to modify the templates to meet my needs?
+
+* fork the old repo
+
+* Check out classic templates to learn how to and then modify templates.
+
+* push to your forked repo. 
+
+* Add your forked repo as a submodule in your blog's repo.
+
+Plugins
+--------
+
+* feed - Generate feed.atom with the latest 10 posts.
+
+* post_summary - Add attribute `summary` to each post(Html rendered from first 255 character of markdown.)
+
+  To touch it in templaes:`{{post.summary}}`
+
+* gavatar - Add attribute: gavatar_id  to author
+
+  To touch it in templates:
+
+  ```html
+  <img src="https://secure.gravatar.com/avatar/{{author.gravatar_id}}?s=200"/>
+  ```
 
 DEMO
 ----
@@ -86,12 +120,12 @@ DEMO
 * https://github.com/hit9/hit9.github.com
 
 
-Develop
--------
+Developers
+----------
 
-1. plugin develop, checkout [golb/plugins](golb/plugins). golb use `blinker` to implement plugins. One plugin needs a method called `register` to connect to `runtime` signal.
+1. plugin development, checkout [golb/plugins](golb/plugins). golb use `blinker` to implement plugins. One plugin needs a method called `register` to connect to `runtime` signal.
 
-2. templates develop, checkout [classic](https://github.com/hit9/golb-templates-classic).
+2. templates development, checkout [classic](https://github.com/hit9/golb-templates-classic).
 
 
 License
