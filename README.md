@@ -103,13 +103,19 @@ Templates
 Plugins
 --------
 
+To on pulgins, in conf.toml:
+
+```toml
+plugins = ["feed","gravatar"]  # use feed and gravatar
+```
+
 * feed - Generate feed.atom with the latest 10 posts.
 
 * post_summary - Add attribute `summary` to each post(Html rendered from first 255 character of markdown.)
 
   To touch it in templaes:`{{post.summary}}`
 
-* gavatar - Add attribute: gavatar_id  to author
+* gravatar - Add attribute: gravatar_id  to author
 
   To touch it in templates:
 
