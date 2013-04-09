@@ -120,12 +120,12 @@ DEMO
 * https://github.com/hit9/hit9.github.com
 
 
-Develop
--------
+Developers
+----------
 
-1. plugin develop, checkout [golb/plugins](golb/plugins). golb use `blinker` to implement plugins. One plugin needs a method called `register` to connect to `runtime` signal.
+1. plugin development, checkout [golb/plugins](golb/plugins). golb use `blinker` to implement plugins. One plugin needs a method called `register` to connect to `runtime` signal.
 
-2. templates develop, checkout [classic](https://github.com/hit9/golb-templates-classic).
+2. templates development, checkout [classic](https://github.com/hit9/golb-templates-classic).
 
 
 License
