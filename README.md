@@ -83,14 +83,16 @@ git init
   see results in browser: http://localhost:5000
 
 
-#### Add , each time you new a post, just `touch` a new markdown file in `src/post` and then write post with toml and markdown!
+Each time you new a post, just `touch` a new markdown file in `src/post` and then write post with toml and markdown!
 
 Templates
 ---------
 
+Available templates:
+
 * classic https://github.com/hit9/golb-templates-classic
 
-### How to modify the templates to meet my needs?
+How to modify the templates to meet my needs?
 
 * fork the old repo
 
@@ -109,6 +111,8 @@ To on pulgins, in conf.toml:
 plugins = ["feed","gravatar"]  # use feed and gravatar
 ```
 
+Available plugins:
+
 * feed - Generate feed.atom with the latest 10 posts.
 
 * post_summary - Add attribute `summary` to each post(Html rendered from first 255 character of markdown.)
@@ -122,6 +126,14 @@ plugins = ["feed","gravatar"]  # use feed and gravatar
   ```html
   <img src="https://secure.gravatar.com/avatar/{{author.gravatar_id}}?s=200"/>
   ```
+
+How to write my plugin, I need that!
+
+* checkout [golb/plugins](golb/plugins), A plugin is a single python script, write a method meets your need and then connect it to signal `runtime` 
+
+* send pull request to golb, update your golb after this pull submit.
+
+* on the plugin in conf.toml
 
 DEMO
 ----
