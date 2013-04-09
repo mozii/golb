@@ -74,11 +74,45 @@ git init
   ## Hello World!
   ```
 
+5. Generate htmls
+
+  ```
+  golb -l
+  python -m SimpleHTTPServer 5000
+  ```
+  see results in browser: http://localhost:5000
+
 Templates
 ---------
 
 * classic https://github.com/hit9/golb-templates-classic
 
+### How to modify the templates to meet my needs?
+
+* fork the old repo
+
+* Check out classic templates to learn how to and then modify templates.
+
+* push to your forked repo. 
+
+* Add your forked repo as a submodule in your blog's repo.
+
+Plugins
+--------
+
+* feed - Generate feed.atom with the latest 10 posts.
+
+* post_summary - Add attribute `summary` to each post(Html rendered from first 255 character of markdown.)
+
+  To touch it in templaes:`{{post.summary}}`
+
+* gavatar - Add attribute: gavatar_id  to author
+
+  To touch it in templates:
+
+  ```html
+  <img src="https://secure.gravatar.com/avatar/{{author.gravatar_id}}?s=200"/>
+  ```
 
 DEMO
 ----
