@@ -82,6 +82,9 @@ git init
   ```
   see results in browser: http://localhost:5000
 
+
+#### Add , each time you new a post, just `touch` a new markdown file in `src/post` and then write post with toml and markdown!
+
 Templates
 ---------
 
@@ -95,7 +98,7 @@ Templates
 
 * push to your forked repo. 
 
-* Add your forked repo as a submodule in your blog's repo.
+* Add your forked repo as a submodule in your blog's repo. set `templates` to `your-forked-repo's-submodule-dir-name`
 
 Plugins
 --------
