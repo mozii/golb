@@ -17,5 +17,5 @@ from .golb import build
 
 def main():
     # parse the arguments
-    dct = docopt(__doc__, version='golb version 0.1.2')
+    dct = docopt(__doc__, version='golb version 0.1.3')
     build(local=dct["--local"])
