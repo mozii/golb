@@ -8,7 +8,7 @@ Markdown&TOML based static blog for programmers with simple templates and plugin
 Install
 -------
 
-    pip install git+git://github.com/hit9/golb.git
+    pip install git+git://github.com/hit9/golb.git@v0.1.3
 
 Usage
 -----

@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='golb',
-    version="0.1.2",
+    version="0.1.3",
     author='hit9',
     author_email='nz2324@126.com',
     description='minimal static blog generator for programmers. write posts in markdown and toml,\
